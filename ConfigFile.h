@@ -34,11 +34,11 @@ typedef Urho3D::Vector<ConfigSection> ConfigMap;
 
 class ConfigFile : public Urho3D::Resource {
 public:
-  URHO3D_OBJECT(ConfigFile, Object);
+  URHO3D_OBJECT(ConfigFile, Urho3D::Object);
 
 public:
   ConfigFile(Urho3D::Context* context, bool caseSensitive = false);
-  ~ConfigFile();
+  ~ConfigFile() override = default;
 
   static void RegisterObject(Urho3D::Context* context);
 

@@ -41,9 +41,6 @@ ConfigFile::ConfigFile(Context* context, bool caseSensitive) :
 {
 }
 
-ConfigFile::~ConfigFile() {
-}
-
 void ConfigFile::RegisterObject(Context* context) {
   context->RegisterFactory<ConfigFile>();
 }
@@ -125,7 +122,11 @@ bool ConfigFile::Save(Serializer& dest, bool smartSave) const {
     for (Vector<String>::ConstIterator section_itr(itr->Begin()); section_itr != itr->End(); ++section_itr) {
       const String line(*section_itr);
 
-      dest.WriteLine(line);
+      if (section_itr == itr->Begin()) {
+        dest.WriteLine("[" + line + "]");
+      } else {
+        dest.WriteLine(line);
+      }
     }
   }
 

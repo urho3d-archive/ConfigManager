@@ -42,9 +42,6 @@ ConfigManager::ConfigManager(Context* context, const String& defaultFileName, bo
   Load();
 }
 
-ConfigManager::~ConfigManager() {
-}
-
 void ConfigManager::RegisterObject(Context* context) {
   context->RegisterFactory<ConfigManager>();
 }
@@ -624,7 +621,7 @@ SettingsMap* ConfigManager::GetSection(const String& section, bool create) {
     // Key does not exist.
     if (!newMap) {
       if (create) {
-        currentMap->operator[](section) = new SettingsMap(); ///@TODO: fix a few bytes leak
+        currentMap->operator[](section) = new SettingsMap(); //@TODO: fix a few bytes leak
         newMap = static_cast<SettingsMap*>((*currentMap)[section].GetVoidPtr());
       }
     }
